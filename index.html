@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack Team | للحلول الرقمية والأتمتة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#d97706',
+                    },
+                    fontWeight: {
+                        'hero': '900',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); }
+        
+        /* تصميم النافذة المنبثقة (Modal) المحدث */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid #d97706;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            width: 90%; max-width: 800px;
+            max-height: 90vh; overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.open .modal-content { transform: scale(1); }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-accent selection:text-white" x-data="{ mobileMenuOpen: false }">
+
+    <header class="fixed w-full top-0 z-50 glass border-b border-gray-800 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-3xl font-extrabold text-accent tracking-wider">Jack Team.</div>
+            <nav class="hidden md:flex space-x-8 space-x-reverse font-semibold text-gray-300">
+                <a href="#home" class="hover:text-accent transition">الرئيسية</a>
+                <a href="#about" class="hover:text-accent transition">من نحن</a>
+                <a href="#services" class="hover:text-accent transition">خدماتنا</a>
+                <a href="#workflow" class="hover:text-accent transition">آلية العمل</a>
+                <a href="#portfolio" class="hover:text-accent transition">أعمالنا</a>
+            </nav>
+            <a href="#contact" class="hidden md:inline-block bg-accent text-white px-6 py-2 rounded-lg font-bold hover:bg-yellow-600 transition shadow-lg shadow-accent/30">تواصل معنا</a>
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-gray-300 text-2xl focus:outline-none">
+                <i class="fas fa-bars" x-show="!mobileMenuOpen"></i>
+                <i class="fas fa-times" x-show="mobileMenuOpen" x-cloak></i>
+            </button>
+        </div>
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden bg-secondary border-t border-gray-800">
+            <nav class="flex flex-col px-6 py-4 space-y-4 font-semibold text-gray-300">
+                <a @click="mobileMenuOpen = false" href="#home" class="hover:text-accent">الرئيسية</a>
+                <a @click="mobileMenuOpen = false" href="#about" class="hover:text-accent">من نحن</a>
+                <a @click="mobileMenuOpen = false" href="#services" class="hover:text-accent">خدماتنا</a>
+                <a @click="mobileMenuOpen = false" href="#portfolio" class="hover:text-accent">أعمالنا</a>
+                <a @click="mobileMenuOpen = false" href="#contact" class="text-accent">تواصل معنا</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 container mx-auto px-6 text-center relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -z-10"></div>
+        <h1 class="text-5xl md:text-7xl font-hero mb-6 leading-tight tracking-tight">
+            نصنع حضورك الرقمي، <br> <br> <span class="text-accent">ونؤتمت نجاحك.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-3xl mx-auto leading-relaxed">
+            Jack Team هو شريكك الموثوق لبناء الهوية الرقمية، صناعة المحتوى الإبداعي، وتطوير أنظمة الأتمتة التي تضاعف إنتاجية الشركات، المكاتب العقارية، والمنشآت التجارية.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="#contact" class="w-full sm:w-auto bg-accent text-white px-8 py-3 rounded-lg font-bold hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-lg">ابدأ مشروعك الآن</a>
+            <a href="#services" class="w-full sm:w-auto border border-gray-600 text-gray-300 px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition text-lg">استكشف خدماتنا</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 border-r-4 border-accent pr-4">من هو Jack Team؟</h2>
+                    <p class="text-gray-400 mb-4 leading-relaxed text-lg">نحن فريق إبداعي متكامل يضم نخبة من المختصين في التصميم، المونتاج، إدارة المشاريع، والتسويق الرقمي، بالإضافة إلى خبراء في تطوير وهندسة الأنظمة المؤتمتة.</p>
+                    <p class="text-gray-400 leading-relaxed text-lg mb-6">رؤيتنا هي مساعدة المؤسسات ورواد الأعمال في السوق السعودي والمنطقة على بناء حضور رقمي قوي واحترافي يعكس جودة أعمالهم، وتحويل العمليات المعقدة إلى مسارات سهلة وآلية.</p>
+                    <ul class="space-y-2 text-gray-300 font-semibold">
+                        <li><i class="fas fa-check-circle text-accent ml-2"></i> فريق احترافي متخصص</li>
+                        <li><i class="fas fa-check-circle text-accent ml-2"></i> جودة تنفيذ بمعايير عالمية</li>
+                        <li><i class="fas fa-check-circle text-accent ml-2"></i> التزام صارم بالمواعيد</li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="فريق العمل" class="rounded-xl shadow-2xl border border-gray-700 opacity-90 hover:opacity-100 transition">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">خدمات متكاملة تصنع الفارق</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">نقدم حلولاً تغطي كافة احتياجاتك الرقمية، من الفكرة والتصميم وحتى الأتمتة وإدارة الحملات.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-cogs"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">الأتمتة والأنظمة الذكية</h3>
+                    <p class="text-gray-400 mb-4">بناء وبرمجة أنظمة ذكية لتسهيل أعمال المكاتب العقارية، الشركات التجارية، المطاعم والعيادات. ربط متكامل يوفر وقتك ومجهودك.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-palette"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">تصميم الهوية البصرية</h3>
+                    <p class="text-gray-400 mb-4">تصميم الشعارات، البروفايلات التعريفية، والمطبوعات الإعلانية بهوية فريدة تعكس قوة علامتك التجارية.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-video"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">الإنتاج المرئي والمونتاج</h3>
+                    <p class="text-gray-400 mb-4">مونتاج الفيديوهات الاحترافية، وصناعة الريلز والفيديوهات القصيرة الجذابة لمنصات التواصل الاجتماعي.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">التسويق وإدارة الحملات</h3>
+                    <p class="text-gray-400 mb-4">بناء الخطط التسويقية، إطلاق وإدارة الحملات الإعلانية الممولة بدقة للوصول إلى جمهورك المستهدف وتحقيق أعلى عائد.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-pen-nib"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">صناعة المحتوى</h3>
+                    <p class="text-gray-400 mb-4">كتابة المحتوى الإعلاني والتسويقي المقنع، وإدارة حسابات التواصل الاجتماعي بشكل يومي ومنظم.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-2xl border border-gray-800 hover:border-accent transition group">
+                    <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl mb-6 group-hover:scale-110 transition"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">الاستشارات وتطوير الأعمال</h3>
+                    <p class="text-gray-400 mb-4">تقديم حلول إبداعية مخصصة واستشارات تسويقية تناسب نشاطك التجاري وتساعدك على التوسع بالسوق.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="workflow" class="py-20 bg-secondary relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10 max-w-5xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">كيف نعمل في <span class="text-accent">Jack Team</span>؟</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-base">خطوات مدروسة ومنهجية واضحة نتبعها لنحول أفكارك إلى واقع رقمي ملموس وناجح.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                <div class="bg-primary p-6 rounded-xl border border-gray-800 hover:border-accent transition duration-300 group shadow-lg flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-2 -top-6 text-gray-800/30 font-hero text-8xl transition-transform duration-500 group-hover:scale-110 pointer-events-none">1</div>
+                    
+                    <div class="flex-shrink-0 w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl group-hover:bg-accent group-hover:text-white transition-colors duration-300 z-10 shadow-md">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="z-10">
+                        <h3 class="text-xl font-bold mb-2 text-white group-hover:text-accent transition-colors">الاستكشاف والتحليل</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">نتواصل معك لفهم احتياجات مشروعك، أهدافك، والجمهور المستهدف بدقة لنضع الأساس الصحيح.</p>
+                    </div>
+                </div>
+
+                <div class="bg-primary p-6 rounded-xl border border-gray-800 hover:border-accent transition duration-300 group shadow-lg flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-2 -top-6 text-gray-800/30 font-hero text-8xl transition-transform duration-500 group-hover:scale-110 pointer-events-none">2</div>
+                    
+                    <div class="flex-shrink-0 w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl group-hover:bg-accent group-hover:text-white transition-colors duration-300 z-10 shadow-md">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="z-10">
+                        <h3 class="text-xl font-bold mb-2 text-white group-hover:text-accent transition-colors">التخطيط والاستراتيجية</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">نرسم خارطة الطريق، ونحدد الحلول التقنية والتصاميم الأنسب لضمان تحقيق أفضل النتائج.</p>
+                    </div>
+                </div>
+
+                <div class="bg-primary p-6 rounded-xl border border-gray-800 hover:border-accent transition duration-300 group shadow-lg flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-2 -top-6 text-gray-800/30 font-hero text-8xl transition-transform duration-500 group-hover:scale-110 pointer-events-none">3</div>
+                    
+                    <div class="flex-shrink-0 w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl group-hover:bg-accent group-hover:text-white transition-colors duration-300 z-10 shadow-md">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="z-10">
+                        <h3 class="text-xl font-bold mb-2 text-white group-hover:text-accent transition-colors">التنفيذ والإبداع</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">يبدأ فريقنا بالعمل على التصميم، الأتمتة، أو المونتاج بأعلى معايير الجودة والاحترافية.</p>
+                    </div>
+                </div>
+
+                <div class="bg-primary p-6 rounded-xl border border-gray-800 hover:border-accent transition duration-300 group shadow-lg flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-2 -top-6 text-gray-800/30 font-hero text-8xl transition-transform duration-500 group-hover:scale-110 pointer-events-none">4</div>
+                    
+                    <div class="flex-shrink-0 w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-accent text-2xl group-hover:bg-accent group-hover:text-white transition-colors duration-300 z-10 shadow-md">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="z-10">
+                        <h3 class="text-xl font-bold mb-2 text-white group-hover:text-accent transition-colors">الإطلاق والتطوير</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">نسلمك المشروع جاهزاً، ونتابع الأداء لنضمن عمل الأنظمة بسلاسة وتحقيق الأهداف المرجوة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="portfolio" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">نماذج من إبداعنا</h2>
+                <p class="text-gray-400">جزء من المشاريع التي نفذها فريق Jack Team بنجاح.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+             <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-800 cursor-pointer">
+                    <video autoplay muted loop playsinline class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <source src="lv_0_٢٠٢٦٠٣٠١٢٣٢٠٤٦.mp4" type="video/mp4">
+                    </video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/70 to-transparent transition-opacity duration-300"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <i class="fas fa-play-circle text-6xl text-white"></i>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold text-white mb-0 group-hover:mb-3 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">مكتب الشعلان العقاري</h3>
+                        
+                        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-48 group-hover:opacity-100">
+                            <p class="text-gray-300 mb-4 text-sm leading-relaxed">إنتاج ومونتاج فيديو تسويقي احترافي يستعرض خدمات المكتب بطريقة جذابة ومقنعة.</p>
+                            <button onclick="openModal('project-shalan')" class="w-full bg-accent text-white font-bold py-2.5 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-base">شاهد الفيديو والتفاصيل</button>
+                        </div>
+                    </div>
+                    
+                    <div id="project-shalan" class="modal-overlay cursor-default" onclick="closeModal('project-shalan')">
+                        <div class="modal-content relative" onclick="event.stopPropagation()">
+                            <button onclick="closeModal('project-shalan')" class="absolute top-6 left-6 text-gray-500 hover:text-white transition text-2xl z-50"><i class="fas fa-times"></i></button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                
+                                <div class="w-full h-full min-h-[300px] rounded-xl shadow-lg border border-accent/50 overflow-hidden bg-black flex items-center justify-center">
+                                    <video controls class="w-full max-h-[450px] object-contain">
+                                        <source src="lv_0_٢٠٢٦٠٣٠١٢٣٢٠٤٦.mp4" type="video/mp4">
+                                        متصفحك لا يدعم تشغيل الفيديوهات.
+                                    </video>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-3xl font-extrabold text-accent mb-4 tracking-wider">مكتب الشعلان العقاري</h3>
+                                    <div class="border-b-2 border-accent w-16 mb-8"></div>
+                                    <h4 class="text-xl font-bold text-white mb-4">لمسات فريقنا الإبداعية:</h4>
+                                    <ul class="space-y-3 text-gray-300 font-medium mb-10">
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> انتقالات بصرية سلسة تحافظ على انتباه المشاهد.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> نصوص متحركة تبرز الخدمات بدقة.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> تزامن مثالي بين الصوت والحركة.</li>
+                                    </ul>
+                                    <h4 class="text-xl font-bold text-white mb-4">رسالة العمل:</h4>
+                                    <p class="text-gray-400 mb-6 leading-relaxed">بناء الثقة من خلال إبراز شهادة الآيزو العالمية، وعرض الخدمات بطريقة تسلسلية تعطي انطباعاً بالأمان للعميل.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-800 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="هوية تجارية" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/70 to-transparent transition-opacity duration-300"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold text-white mb-0 group-hover:mb-3 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">تصميم هوية بصرية</h3>
+                        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-48 group-hover:opacity-100">
+                            <p class="text-gray-300 mb-4 text-sm leading-relaxed">بناء هوية بصرية متكاملة تعكس قوة واحترافية العلامة التجارية، وتجذب العملاء.</p>
+                            <button onclick="openModal('project2')" class="w-full bg-accent text-white font-bold py-2.5 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-base">عرض تفاصيل الإنجازات</button>
+                        </div>
+                    </div>
+                    
+                    <div id="project2" class="modal-overlay cursor-default" onclick="closeModal('project2')">
+                        <div class="modal-content relative" onclick="event.stopPropagation()">
+                            <button onclick="closeModal('project2')" class="absolute top-6 left-6 text-gray-500 hover:text-white transition text-2xl"><i class="fas fa-times"></i></button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="هوية تجارية" class="w-full h-full object-cover rounded-xl shadow-lg border border-accent/50">
+                                <div>
+                                    <h3 class="text-3xl font-extrabold text-accent mb-4 tracking-wider">تصميم هوية بصرية</h3>
+                                    <div class="border-b-2 border-accent w-16 mb-8"></div>
+                                    <h4 class="text-xl font-bold text-white mb-4">الإنجازات التي حققها الفريق:</h4>
+                                    <ul class="space-y-3 text-gray-300 font-medium mb-10">
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> زيادة الوعي بالعلامة التجارية بنسبة 35%.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> تحسين تجربة المستخدم على الموقع.</li>
+                                    </ul>
+                                    <h4 class="text-xl font-bold text-white mb-4">الشرح التفصيلي للتصميم:</h4>
+                                    <p class="text-gray-400 mb-6 leading-relaxed">قمنا بتصميم شعار فريد يجسد جوهر العلامة التجارية، بالإضافة إلى اختيار لوحة ألوان تعبر عن الحيوية والابتكار.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-800 cursor-pointer">
+    <img src="team2.jpeg" alt="حملة تسويقية متجر محور" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/70 to-transparent transition-opacity duration-300"></div>
+    
+    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+        <h3 class="text-2xl font-bold text-white mb-0 group-hover:mb-3 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">حملة تسويقية: متجر مِحْوَر</h3>
+        
+        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-48 group-hover:opacity-100">
+            <p class="text-gray-300 mb-4 text-sm leading-relaxed">إدارة حملة تسويقية متكاملة وتصميم هويات بصرية فاخرة لرفع المبيعات والوعي بالعلامة التجارية.</p>
+            <button onclick="openModal('project-mihwar-marketing')" class="w-full bg-accent text-white font-bold py-2.5 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-base">استعراض تفاصيل الحملة</button>
+        </div>
+    </div>
+    
+    <div id="project-mihwar-marketing" class="modal-overlay cursor-default" onclick="closeModal('project-mihwar-marketing')">
+        <div class="modal-content relative max-w-4xl" onclick="event.stopPropagation()">
+            <button onclick="closeModal('project-mihwar-marketing')" class="absolute top-6 left-6 text-gray-500 hover:text-white transition text-2xl z-50"><i class="fas fa-times"></i></button>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                    <img src="team2.jpeg" alt="نموذج تصميم متجر محور" class="w-full h-64 object-cover rounded-xl shadow-lg border border-accent/30">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="team4.jpeg" alt="تصميم إعلاني 1" class="w-full h-32 object-cover rounded-lg border border-gray-800">
+                        <img src="team5.jpeg" alt="تصميم إعلاني 2" class="w-full h-32 object-cover rounded-lg border border-gray-800">
+                    </div>
+                </div>
+                
+                <div class="overflow-y-auto max-h-[450px] pl-2">
+                    <span class="text-accent text-sm font-bold tracking-wider block mb-1">دراسة حالة (Case Study)</span>
+                    <h3 class="text-3xl font-extrabold text-white mb-2">متجر مِحْوَر للساعات</h3>
+                    <div class="border-b-2 border-accent w-16 mb-6"></div>
+                    
+                    <p class="text-gray-400 font-light leading-relaxed text-sm mb-6">
+                        <strong>التحدي:</strong> رغبة العميل في إبراز فخامة الساعات بطريقة تجذب الفئة المهتمة بالاكسسوارات الفاخرة، وزيادة معدل التحويل والمبيعات للمتجر.
+                    </p>
+                    
+                    <h4 class="text-lg font-bold text-white mb-3">استراتيجيتنا وحلولنا:</h4>
+                    <ul class="space-y-2 text-gray-300 font-light text-sm mb-6 list-disc list-inside">
+                        <li>تصميم هوية بصرية وبنرات إعلانية تعتمد على الألوان الملكية (الذهبي، الرخامي، الداكن).</li>
+                        <li>التركيز على إبراز أدق تفاصيل الساعات لتعزيز ثقة العميل بجودة المنتج.</li>
+                        <li>إطلاق حملة إعلانية موجهة بدقة نحو المهتمين بالساعات الفاخرة.</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-bold text-white mb-3">إنجازات وأرقام الحملة (ROI):</h4>
+                    <div class="grid grid-cols-3 gap-4 bg-slate-800/50 p-4 rounded-xl text-center border border-gray-800 mb-2">
+                        <div>
+                            <span class="block text-2xl font-black text-accent">+40%</span>
+                            <span class="text-xs text-gray-400">زيادة المبيعات</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-black text-white">50K+</span>
+                            <span class="text-xs text-gray-400">وصول للجمهور</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl font-black text-white">10+</span>
+                            <span class="text-xs text-gray-400">تصميم مُنفّذ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-800 cursor-pointer">
+                    <video autoplay muted loop playsinline class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <source src="WhatsApp Video 2026-03-16 at 6.02.43 AM.mp4" type="video/mp4">
+                    </video>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/70 to-transparent transition-opacity duration-300"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <i class="fas fa-play-circle text-6xl text-white"></i>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold text-white mb-0 group-hover:mb-3 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">حملة توعوية وتنمية المرأة</h3>
+                        
+                        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-48 group-hover:opacity-100">
+                            <p class="text-gray-300 mb-4 text-sm leading-relaxed">إنتاج وتصميم فيديو رسوم متحركة (Motion Graphics) لدعم القضايا المجتمعية والتوعوية.</p>
+                            <button onclick="openModal('project-awareness')" class="w-full bg-accent text-white font-bold py-2.5 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-base">شاهد الفيديو والتفاصيل</button>
+                        </div>
+                    </div>
+                    
+                    <div id="project-awareness" class="modal-overlay cursor-default" onclick="closeModal('project-awareness')">
+                        <div class="modal-content relative" onclick="event.stopPropagation()">
+                            <button onclick="closeModal('project-awareness')" class="absolute top-6 left-6 text-gray-500 hover:text-white transition text-2xl z-50"><i class="fas fa-times"></i></button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                
+                                <div class="w-full h-full min-h-[300px] rounded-xl shadow-lg border border-accent/50 overflow-hidden bg-black flex items-center justify-center">
+                                    <video controls class="w-full max-h-[450px] object-contain">
+                                        <source src="WhatsApp Video 2026-03-16 at 6.02.43 AM.mp4" type="video/mp4">
+                                        متصفحك لا يدعم تشغيل الفيديوهات.
+                                    </video>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-3xl font-extrabold text-accent mb-4 tracking-wider">فيديو توعوي وتنمية المرأة</h3>
+                                    <div class="border-b-2 border-accent w-16 mb-8"></div>
+                                    <h4 class="text-xl font-bold text-white mb-4">اللمسات الإبداعية في العمل:</h4>
+                                    <ul class="space-y-3 text-gray-300 font-medium mb-10">
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> تصميم رسوم متحركة (Motion Graphics) مبسطة ومعبرة.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> اختيار ألوان دافئة ومريحة تعزز من الطابع الإنساني والتوعوي.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> دمج تعليق صوتي ومؤثرات تلامس مشاعر الجمهور وتوصل الرسالة بوضوح.</li>
+                                    </ul>
+                                    <h4 class="text-xl font-bold text-white mb-4">الهدف من المشروع:</h4>
+                                    <p class="text-gray-400 mb-6 leading-relaxed">صناعة محتوى مرئي هادف يخدم قضايا المجتمع، تم فيه التركيز على إيصال الرسالة الإنسانية والتوعوية بسلاسة تامة ومصداقية عالية.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+               <div class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-800 cursor-pointer">
+                    <img src="team2.jpeg" alt="تصاميم متجر محور" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/70 to-transparent transition-opacity duration-300"></div>
+                    
+                    <div class="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold text-white mb-0 group-hover:mb-3 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">متجر مِحْوَر للساعات</h3>
+                        
+                        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-48 group-hover:opacity-100">
+                            <p class="text-gray-300 mb-4 text-sm leading-relaxed">تصميم هوية بصرية وحملة تسويقية تعكس الفخامة والأناقة للساعات الفاخرة.</p>
+                            <button onclick="openModal('project-mihwar')" class="w-full bg-accent text-white font-bold py-2.5 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-base">عرض تفاصيل الإنجازات</button>
+                        </div>
+                    </div>
+                    
+                    <div id="project-mihwar" class="modal-overlay cursor-default" onclick="closeModal('project-mihwar')">
+                        <div class="modal-content relative" onclick="event.stopPropagation()">
+                            <button onclick="closeModal('project-mihwar')" class="absolute top-6 left-6 text-gray-500 hover:text-white transition text-2xl z-50"><i class="fas fa-times"></i></button>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <img src="team2.jpeg" alt="تصاميم متجر محور" class="w-full h-full object-cover rounded-xl shadow-lg border border-accent/50">
+                                <div>
+                                    <h3 class="text-3xl font-extrabold text-accent mb-4 tracking-wider">متجر مِحْوَر للساعات</h3>
+                                    <div class="border-b-2 border-accent w-16 mb-8"></div>
+                                    <h4 class="text-xl font-bold text-white mb-4">الإنجازات التي حققها الفريق:</h4>
+                                    <ul class="space-y-3 text-gray-300 font-medium mb-10">
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> إبراز تفاصيل المنتجات لزيادة ثقة المشتري.</li>
+                                        <li><i class="fas fa-check-circle text-accent ml-2"></i> بناء هوية بصرية فخمة تزيد من قيمة العلامة التجارية.</li>
+                                    </ul>
+                                    <h4 class="text-xl font-bold text-white mb-4">الرؤية الفنية للتصميم:</h4>
+                                    <p class="text-gray-400 mb-6 leading-relaxed">اعتمدنا دمج الألوان الملكية كالذهبي والملمس الرخامي لخلق بيئة بصرية تعكس الرقي، مع نصوص تسويقية جذابة مثل "تفرّد يليق بمقامك".</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-secondary">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">الأسئلة الشائعة</h2>
+            <div class="space-y-4">
+                <div x-data="{ open: false }" class="bg-primary border border-gray-800 rounded-lg">
+                    <button @click="open = !open" class="w-full text-right px-6 py-4 font-bold text-lg flex justify-between items-center focus:outline-none">
+                        <span>هل تقدمون خدماتكم للشركات خارج السعودية؟</span>
+                        <i class="fas" :class="open ? 'fa-chevron-up text-accent' : 'fa-chevron-down'"></i>
+                    </button>
+                    <div x-show="open" x-collapse class="px-6 pb-4 text-gray-400">نعم، خدماتنا الرقمية والتسويقية متاحة لكافة الشركات والمؤسسات في الوطن العربي.</div>
+                </div>
+                <div x-data="{ open: false }" class="bg-primary border border-gray-800 rounded-lg">
+                    <button @click="open = !open" class="w-full text-right px-6 py-4 font-bold text-lg flex justify-between items-center focus:outline-none">
+                        <span>كيف يمكن للأتمتة أن تفيد نشاطي التجاري؟</span>
+                        <i class="fas" :class="open ? 'fa-chevron-up text-accent' : 'fa-chevron-down'"></i>
+                    </button>
+                    <div x-show="open" x-collapse class="px-6 pb-4 text-gray-400">الأتمتة تقوم بربط أنظمتك ببعضها وتقليل التدخل البشري. مثلاً للمكاتب العقارية، يمكننا بناء نظام يحول طلبات العملاء من الواتساب إلى قاعدة بياناتك تلقائياً، وللمطاعم يمكننا أتمتة حجوزات ومخزون العمل، مما يوفر لك مئات الساعات شهرياً ويقلل الأخطاء وغيرها الكثير من الاشياء.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="bg-secondary rounded-3xl overflow-hidden border border-gray-800 flex flex-col lg:flex-row shadow-2xl">
+                <div class="w-full lg:w-1/3 bg-slate-800 p-10 flex flex-col justify-center">
+                    <h3 class="text-3xl font-bold mb-6 text-white tracking-wide">لنبني نجاحك القادم معاً!</h3>
+                    <div class="border-b-2 border-accent w-16 mb-10"></div>
+                    <p class="text-gray-400 mb-12">هل لديك فكرة مشروع أو ترغب في تطوير أعمالك؟ تواصل معنا الآن.</p>
+                    <div class="space-y-8">
+                        <div class="flex items-center text-gray-300 gap-4">
+                            <i class="fab fa-whatsapp text-accent text-3xl"></i>
+                            <span class="text-xl dir-ltr tracking-wider">+966 5X XXX XXXX</span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-2/3 p-10 lg:p-16">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-400 text-sm font-bold mb-2">الاسم الكريم</label>
+                                <input type="text" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="اسمك أو اسم شركتك">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-sm font-bold mb-2">رقم الواتساب</label>
+                                <input type="text" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="رقم التواصل">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm font-bold mb-2">الخدمة المطلوبة</label>
+                            <select class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition appearance-none">
+                                <option>تصميم وهوية بصرية</option>
+                                <option>تسويق وإدارة حملات</option>
+                                <option>إنتاج ومونتاج فيديو</option>
+                                <option>أتمتة وأنظمة ذكية</option>
+                                <option>استشارة وتطوير أعمال</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm font-bold mb-2">تفاصيل المشروع</label>
+                            <textarea rows="4" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="حدثنا عن فكرتك..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent text-white font-bold py-4 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-lg">إرسال الطلب</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary py-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 font-semibold">جميع الحقوق محفوظة &copy; 2026 لصالح <span class="text-accent">Jack Team</span>.</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+            document.body.style.overflow = 'hidden'; // لمنع التمرير أثناء فتح النافذة
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+            document.body.style.overflow = 'auto'; // لإعادة التمرير
+        }
+    </script>
+</body>
+</html>
