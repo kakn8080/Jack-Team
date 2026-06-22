@@ -487,38 +487,39 @@
                     <div class="space-y-8">
                         <div class="flex items-center text-gray-300 gap-4">
                             <i class="fab fa-whatsapp text-accent text-3xl"></i>
-                            <span class="text-xl dir-ltr tracking-wider">+966 5X XXX XXXX</span> 
+                            <span class="text-xl dir-ltr tracking-wider">967781899624</span> 
                         </div>
                     </div>
                 </div>
                 <div class="w-full lg:w-2/3 p-10 lg:p-16">
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-gray-400 text-sm font-bold mb-2">الاسم الكريم</label>
-                                <input type="text" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="اسمك أو اسم شركتك">
-                            </div>
-                            <div>
-                                <label class="block text-gray-400 text-sm font-bold mb-2">رقم الواتساب</label>
-                                <input type="text" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="رقم التواصل">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 text-sm font-bold mb-2">الخدمة المطلوبة</label>
-                            <select class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition appearance-none">
-                                <option>تصميم وهوية بصرية</option>
-                                <option>تسويق وإدارة حملات</option>
-                                <option>إنتاج ومونتاج فيديو</option>
-                                <option>أتمتة وأنظمة ذكية</option>
-                                <option>استشارة وتطوير أعمال</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 text-sm font-bold mb-2">تفاصيل المشروع</label>
-                            <textarea rows="4" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="حدثنا عن فكرتك..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-accent text-white font-bold py-4 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-lg">إرسال الطلب</button>
-                    </form>
+                    <form onsubmit="sendToWhatsApp(event)">
+    <div class="mb-4">
+        <label class="block text-gray-400 text-sm font-bold mb-2">الاسم الكامل</label>
+        <input type="text" id="wa-name" required class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="أدخل اسمك">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-400 text-sm font-bold mb-2">رقم الهاتف أو الواتساب</label>
+        <input type="tel" id="wa-phone" required class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="مثال: +967...">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-400 text-sm font-bold mb-2">نوع الخدمة المطلوبة</label>
+        <select id="wa-service" class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition appearance-none">
+            <option>تصميم وتطوير مواقع</option>
+            <option>مونتاج وإنتاج مرئي</option>
+            <option>تصميم هويات بصرية</option>
+            <option>حملات تسويقية</option>
+            <option>استشارة وتطوير أعمال</option>
+            <option>أتمتة الاعمال وأنظمة ذكية</option>
+        </select>
+    </div>
+    <div class="mb-6">
+        <label class="block text-gray-400 text-sm font-bold mb-2">تفاصيل المشروع</label>
+        <textarea id="wa-details" rows="4" required class="w-full bg-primary text-white border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:border-accent transition" placeholder="حدثنا عن فكرتك..."></textarea>
+    </div>
+    <button type="submit" class="w-full bg-accent text-white font-bold py-4 rounded-lg hover:bg-yellow-600 transition shadow-lg shadow-accent/30 text-lg flex justify-center items-center gap-2">
+        إرسال الطلب عبر الواتساب <i class="fab fa-whatsapp text-xl"></i>
+    </button>
+</form>
                 </div>
             </div>
         </div>
@@ -538,6 +539,28 @@
             document.getElementById(id).classList.remove('open');
             document.body.style.overflow = 'auto'; // لإعادة التمرير
         }
+        function sendToWhatsApp(event) {
+    event.preventDefault(); // إيقاف إعادة تحميل الصفحة الافتراضي
+
+    // جلب البيانات التي أدخلها العميل في النموذج
+    const name = document.getElementById('wa-name').value;
+    const phone = document.getElementById('wa-phone').value;
+    const service = document.getElementById('wa-service').value;
+    const details = document.getElementById('wa-details').value;
+
+    // رقم الواتساب الذي سيستقبل الطلبات
+    const targetNumber = "967781899624";
+
+    // تنسيق الرسالة بشكل أنيق وواضح
+    const message = `مرحباً فريق Jack Team،\n\nأود طلب خدمة جديدة:\n\n👤 *الاسم:* ${name}\n📞 *رقم التواصل:* ${phone}\n🛠️ *الخدمة المطلوبة:* ${service}\n📝 *تفاصيل المشروع:* ${details}`;
+
+    // تحويل النص ليناسب الرابط الخاص بالمتصفح
+    const encodedMessage = encodeURIComponent(message);
+
+    // إنشاء رابط الواتساب وفتحه في نافذة جديدة
+    const whatsappUrl = `https://wa.me/${targetNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+}
     </script>
 </body>
 </html>
